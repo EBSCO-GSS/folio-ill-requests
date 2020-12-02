@@ -46,7 +46,7 @@ class UsrForm extends Component {
     //console.log(params);
     if (params.cid) {
       const id = params.cid;
-      alert(id);
+      //alert(id);
       fetch("./api/id/" + id);
     }
   }
