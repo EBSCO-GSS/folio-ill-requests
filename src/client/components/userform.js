@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import Conteiner from "react-bootstrap/Container";
 import { FormattedMessage } from "react-intl";
+const queryString = require("query-string");
 
 class UsrForm extends Component {
   constructor(props) {
@@ -17,7 +18,9 @@ class UsrForm extends Component {
   }
 
   myChangeHandle = (event) => {
-    this.setState({ usr: event.target.value });
+    this.setState({
+      usr: event.target.value,
+    });
   };
 
   mySetPassword = (event) => {
@@ -40,6 +43,16 @@ class UsrForm extends Component {
         )
       );
   };
+
+  async componentDidMount() {
+    const params = queryString.parse(location.search);
+    //console.log(params);
+    if (params.cid) {
+      const id = params.cid;
+      alert(id);
+      fetch("./api/id/" + id);
+    }
+  }
 
   render() {
     var apitkn = this.state.data.personal;

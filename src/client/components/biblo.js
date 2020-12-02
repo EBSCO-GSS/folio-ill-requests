@@ -63,7 +63,11 @@ class Biblo extends Component {
 
     fetch(
       "./api/request/" + i + "&" + a + "&" + us + "&" + bib
-    ).then((res) => console.log(res));
+    )
+      .then((res) => console.log(res))
+      .then(() => {
+        alert("Exito!! se creo la solicitud correctamente");
+      });
   };
 
   render() {

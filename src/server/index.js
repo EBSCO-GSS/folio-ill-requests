@@ -7,15 +7,20 @@ const app = express();
 
 app.use(express.static("dist"));
 
+app.get("/api/id/:id", (request, response) => {
+  var i = request.param("id");
+  global.id = i;
+});
+
 function getToken() {
-  const url = config["demo"]["folio_url"] + "authn/login";
+  const url = config[id]["folio_url"] + "authn/login";
   const headers = {
     "Content-Type": "application/json",
-    "x-okapi-tenant": config["demo"]["folio_tenandid"],
+    "x-okapi-tenant": config[id]["folio_tenandid"],
   };
   const auth = {
-    username: config["demo"]["folio_user"],
-    password: config["demo"]["folio_pass"],
+    username: config[id]["folio_user"],
+    password: config[id]["folio_pass"],
   };
   return new Promise(function (resolve, reject) {
     try {
@@ -50,12 +55,12 @@ app.get("/api/getUser/:usr&:pass", (req, res) => {
   try {
     var name = req.param("usr");
     var pass = req.param("pass");
+    console.log("ur=" + config[id]["folio_url"]);
 
-    var authUrl =
-      config["demo"]["folio_url"] + "authn/login";
+    var authUrl = config[id]["folio_url"] + "authn/login";
     const authHeaders = {
       "Content-Type": "application/json",
-      "x-okapi-tenant": config["demo"]["folio_tenandid"],
+      "x-okapi-tenant": config[id]["folio_tenandid"],
     };
 
     const usrData = {
@@ -78,13 +83,13 @@ app.get("/api/getUser/:usr&:pass", (req, res) => {
               .then(function () {
                 axios({
                   url:
-                    config["demo"]["folio_url"] +
+                    config[id]["folio_url"] +
                     "bl-users/by-username/" +
                     name,
                   method: "get",
                   headers: {
                     "X-Okapi-Tenant":
-                      config["demo"]["folio_tenandid"],
+                      config[id]["folio_tenandid"],
                     "X-Okapi-Token": men,
                   },
                 })
@@ -98,13 +103,15 @@ app.get("/api/getUser/:usr&:pass", (req, res) => {
                       });
                     }
                   })
-                  .catch((e) => console.log(e));
+                  .catch((e) =>
+                    console.log(e.response.data)
+                  );
               });
           }
           a();
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error.response.data));
   } catch (err) {
     console.log("err", err);
   }
@@ -155,12 +162,12 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
           .then(function () {
             axios({
               url:
-                config["demo"]["folio_url"] +
+                config[id]["folio_url"] +
                 "locations?query=(details=*)",
               method: "get",
               headers: {
                 "X-Okapi-Tenant":
-                  config["demo"]["folio_tenandid"],
+                  config[id]["folio_tenandid"],
                 "X-Okapi-Token": tk,
               },
             }).then(function (res) {
@@ -181,12 +188,12 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
           .then(function () {
             axios({
               url:
-                config["demo"]["folio_url"] +
+                config[id]["folio_url"] +
                 "instance-storage/instances",
               method: "post",
               headers: {
                 "X-Okapi-Tenant":
-                  config["demo"]["folio_tenandid"],
+                  config[id]["folio_tenandid"],
                 "X-Okapi-Token": tok,
                 "Content-Type": "application/json",
               },
@@ -232,12 +239,12 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
         new Promise(function (resolve, reject) {
           axios({
             url:
-              config["demo"]["folio_url"] +
+              config[id]["folio_url"] +
               "holdings-storage/holdings",
             method: "post",
             headers: {
               "X-Okapi-Tenant":
-                config["demo"]["folio_tenandid"],
+                config[id]["folio_tenandid"],
               "X-Okapi-Token": okt,
               "Content-Type": "application/json",
             },
@@ -260,15 +267,15 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
                   tagList: ["important"],
                 },
               };
-              console.log(item);
+              //console.log(item);
               axios({
                 url:
-                  config["demo"]["folio_url"] +
+                  config[id]["folio_url"] +
                   "item-storage/items",
                 method: "post",
                 headers: {
                   "X-Okapi-Tenant":
-                    config["demo"]["folio_tenandid"],
+                    config[id]["folio_tenandid"],
                   "X-Okapi-Token": okt,
                   "Content-Type": "application/json",
                 },
@@ -302,14 +309,14 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
           .then(function () {
             axios({
               url:
-                config["demo"]["folio_url"] +
+                config[id]["folio_url"] +
                 "inventory/instances?limit=30&query=keyword all '" +
                 i +
                 "'",
               method: "get",
               headers: {
                 "X-Okapi-Tenant":
-                  config["demo"]["folio_tenandid"],
+                  config[id]["folio_tenandid"],
                 "X-Okapi-Token": tok,
               },
             })
@@ -320,13 +327,13 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
               .then(function () {
                 axios({
                   url:
-                    config["demo"]["folio_url"] +
+                    config[id]["folio_url"] +
                     "holdings-storage/holdings?limit=100&query=instanceId==" +
                     rId,
                   method: "get",
                   headers: {
                     "X-Okapi-Tenant":
-                      config["demo"]["folio_tenandid"],
+                      config[id]["folio_tenandid"],
                     "X-Okapi-Token": tok,
                   },
                 })
@@ -339,13 +346,13 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
                   .then(function () {
                     axios({
                       url:
-                        config["demo"]["folio_url"] +
+                        config[id]["folio_url"] +
                         "inventory/items?query=holdingsRecordId==" +
                         recid,
                       method: "get",
                       headers: {
                         "X-Okapi-Tenant":
-                          config["demo"]["folio_tenandid"],
+                          config[id]["folio_tenandid"],
                         "X-Okapi-Token": tok,
                       },
                     })
@@ -379,14 +386,14 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
           .then(function () {
             axios({
               url:
-                config["demo"]["folio_url"] +
+                config[id]["folio_url"] +
                 "inventory/instances?limit=30&query=keyword all '" +
                 i +
                 "'",
               method: "get",
               headers: {
                 "X-Okapi-Tenant":
-                  config["demo"]["folio_tenandid"],
+                  config[id]["folio_tenandid"],
                 "X-Okapi-Token": stok,
               },
             })
@@ -428,12 +435,11 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
           .then(function () {
             axios({
               url:
-                config["demo"]["folio_url"] +
-                "service-points",
+                config[id]["folio_url"] + "service-points",
               method: "get",
               headers: {
                 "X-Okapi-Tenant":
-                  config["demo"]["folio_tenandid"],
+                  config[id]["folio_tenandid"],
                 "X-Okapi-Token": spt,
               },
             })
@@ -469,14 +475,13 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
         }),
         axios({
           url:
-            config["demo"]["folio_url"] +
+            config[id]["folio_url"] +
             "inventory/instances?limit=30&query=keyword all '" +
             i +
             "'",
           method: "get",
           headers: {
-            "X-Okapi-Tenant":
-              config["demo"]["folio_tenandid"],
+            "X-Okapi-Tenant": config[id]["folio_tenandid"],
             "X-Okapi-Token": tokreq,
           },
         })
@@ -486,13 +491,13 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
           .then(function () {
             axios({
               url:
-                config["demo"]["folio_url"] +
+                config[id]["folio_url"] +
                 "holdings-storage/holdings?limit=100&query=instanceId==" +
                 rId,
               method: "get",
               headers: {
                 "X-Okapi-Tenant":
-                  config["demo"]["folio_tenandid"],
+                  config[id]["folio_tenandid"],
                 "X-Okapi-Token": tokreq,
               },
             })
@@ -502,13 +507,13 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
               .then(function () {
                 axios({
                   url:
-                    config["demo"]["folio_url"] +
+                    config[id]["folio_url"] +
                     "inventory/items?query=holdingsRecordId==" +
                     recid,
                   method: "get",
                   headers: {
                     "X-Okapi-Tenant":
-                      config["demo"]["folio_tenandid"],
+                      config[id]["folio_tenandid"],
                     "X-Okapi-Token": tokreq,
                   },
                 })
@@ -556,12 +561,12 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
                   .then(function () {
                     axios({
                       url:
-                        config["demo"]["folio_url"] +
+                        config[id]["folio_url"] +
                         "circulation/requests",
                       method: "post",
                       headers: {
                         "X-Okapi-Tenant":
-                          config["demo"]["folio_tenandid"],
+                          config[id]["folio_tenandid"],
                         "X-Okapi-Token": tokreq,
                         "Content-Type": "application/json",
                       },
@@ -599,8 +604,8 @@ app.get("/api/request/:i&:a&:us&:bib", (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 8081, () =>
+app.listen(process.env.PORT || 8080, () =>
   console.log(
-    `Listening on port ${process.env.PORT || 8081}!`
+    `Listening on port ${process.env.PORT || 8080}!`
   )
 );
