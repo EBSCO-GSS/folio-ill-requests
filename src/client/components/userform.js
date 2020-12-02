@@ -38,10 +38,7 @@ class UsrForm extends Component {
       .then((res) => res.json())
       .then((token) => this.setState({ data: token.info }))
       .then(() =>
-        sessionStorage.setItem(
-          "user",
-          JSON.stringify(this.state.data["id"])
-        )
+        sessionStorage.setItem("user", JSON.stringify(this.state.data["id"]))
       );
   };
 
@@ -51,6 +48,7 @@ class UsrForm extends Component {
     //console.log(params);
     alert(cid);
     if (cid != "") {
+      alert(cid);
       //const id = params.cid;
       fetch("./api/id/" + cid);
     }
@@ -91,37 +89,25 @@ class UsrForm extends Component {
                   className="mt-2"
                   block
                 >
-                  <FormattedMessage
-                    id="app.button"
-                    defaultMessage="Ingreso"
-                  />
+                  <FormattedMessage id="app.button" defaultMessage="Ingreso" />
                 </Button>
               </Form.Group>
             </Form>
             <Card.Text>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <FormattedMessage
-                    id="app.usr"
-                    defaultMessage="Usuario"
-                  />
+                  <FormattedMessage id="app.usr" defaultMessage="Usuario" />
                   <span>: {this.state.usr}</span>
                 </ListGroup.Item>
                 {apitkn ? (
                   <ListGroup.Item>
-                    <FormattedMessage
-                      id="app.name"
-                      defaultMessage="Nombre"
-                    />
-                    : {apitkn["firstName"]}
+                    <FormattedMessage id="app.name" defaultMessage="Nombre" />:{" "}
+                    {apitkn["firstName"]}
                   </ListGroup.Item>
                 ) : (
                   <ListGroup.Item>
-                    <FormattedMessage
-                      id="app.name"
-                      defaultMessage="Nombre"
-                    />
-                    : --
+                    <FormattedMessage id="app.name" defaultMessage="Nombre" />:
+                    --
                   </ListGroup.Item>
                 )}
                 {apitkn ? (
@@ -143,19 +129,13 @@ class UsrForm extends Component {
                 )}
                 {apitkn ? (
                   <ListGroup.Item>
-                    <FormattedMessage
-                      id="app.Email"
-                      defaultMessage="Email"
-                    />
-                    : {apitkn["email"]}
+                    <FormattedMessage id="app.Email" defaultMessage="Email" />:{" "}
+                    {apitkn["email"]}
                   </ListGroup.Item>
                 ) : (
                   <ListGroup.Item>
-                    <FormattedMessage
-                      id="app.Email"
-                      defaultMessage="Email"
-                    />
-                    : --
+                    <FormattedMessage id="app.Email" defaultMessage="Email" />:
+                    --
                   </ListGroup.Item>
                 )}
               </ListGroup>
