@@ -11,6 +11,7 @@ class UsrForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      url: new URLSearchParams(window.location.search),
       usr: "",
       pass: "",
       data: "",
@@ -45,12 +46,13 @@ class UsrForm extends Component {
   };
 
   async componentDidMount() {
-    const params = queryString.parse(location.search);
+    //const params = queryString.parse(location.search);
+    const cid = this.state.url.get("cid");
     //console.log(params);
-    if (params.cid) {
-      const id = params.cid;
-      alert(id);
-      fetch("./api/id/" + id);
+    alert(cid);
+    if (cid != "") {
+      //const id = params.cid;
+      fetch("./api/id/" + cid);
     }
   }
 
