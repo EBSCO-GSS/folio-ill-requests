@@ -2,11 +2,17 @@
   "demo": {
     "folio_url": "https://okapi-demo.folio.ebsco.com/",
     "folio_tenandid": "fs00000002",
-    "folio_user": "folio",
-    "folio_pass": "Madison"
+    "folio_user": "sanucp",
+    "folio_pass": "And130553!"
   },
   "test": {
     "folio_url": "http://localhost:9130/",
+    "folio_tenandid": "diku",
+    "folio_user": "diku_admin",
+    "folio_pass": "admin"
+  },
+  "game": {
+    "folio_url": "http://192.168.0.22:9130/",
     "folio_tenandid": "diku",
     "folio_user": "diku_admin",
     "folio_pass": "admin"
