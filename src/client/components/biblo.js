@@ -59,18 +59,7 @@ class Biblo extends Component {
     const bib = this.state.atit;
     const cid = sessionStorage.getItem("cid");
 
-    fetch(
-      "./api/request/" +
-        i +
-        "&" +
-        a +
-        "&" +
-        us +
-        "&" +
-        bib +
-        "&" +
-        cid
-    )
+    fetch("./api/request/" + i + "&" + a + "&" + us + "&" + bib + "&" + cid)
       .then((res) => console.log(res))
       .then(() => {
         alert("Exito!! se creo la solicitud correctamente");
@@ -98,9 +87,7 @@ class Biblo extends Component {
                     />
                     :
                   </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.genre}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.genre}></Form.Control>
                   <Form.Label>
                     <FormattedMessage
                       id="bib.atittle"
@@ -108,51 +95,26 @@ class Biblo extends Component {
                     />
                     :
                   </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.atit}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.atit}></Form.Control>
                   <Form.Label>
-                    <FormattedMessage
-                      id="bib.tittle"
-                      defaultMessage="Titulo"
-                    />
+                    <FormattedMessage id="bib.tittle" defaultMessage="Titulo" />
                     :
                   </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.tit}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.tit}></Form.Control>
                   <Form.Label>
-                    <FormattedMessage
-                      id="bib.aut"
-                      defaultMessage="Autor"
-                    />
-                    :{" "}
+                    <FormattedMessage id="bib.aut" defaultMessage="Autor" />:{" "}
                   </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.aut}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.aut}></Form.Control>
                   <Form.Label>ISBN: </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.isbn}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.isbn}></Form.Control>
                   <Form.Label>ISSN: </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.issn}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.issn}></Form.Control>
                   <Form.Label>DOI: </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.doi}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.doi}></Form.Control>
                   <Form.Label>
-                    <FormattedMessage
-                      id="bib.date"
-                      defaultMessage="Fecha"
-                    />
-                    :{" "}
+                    <FormattedMessage id="bib.date" defaultMessage="Fecha" />:{" "}
                   </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.date}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.date}></Form.Control>
                   <Form.Label>
                     <FormattedMessage
                       id="bib.volume"
@@ -160,19 +122,11 @@ class Biblo extends Component {
                     />
                     :{" "}
                   </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.volume}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.volume}></Form.Control>
                   <Form.Label>
-                    <FormattedMessage
-                      id="bib.issue"
-                      defaultMessage="Numero"
-                    />
-                    :{" "}
+                    <FormattedMessage id="bib.issue" defaultMessage="Numero" />:{" "}
                   </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.issue}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.issue}></Form.Control>
                   <Form.Label>
                     <FormattedMessage
                       id="bib.spage"
@@ -180,23 +134,14 @@ class Biblo extends Component {
                     />
                     :{" "}
                   </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.spage}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.spage}></Form.Control>
                   <Form.Label>
-                    <FormattedMessage
-                      id="bib.pages"
-                      defaultMessage="Paginas"
-                    />
+                    <FormattedMessage id="bib.pages" defaultMessage="Paginas" />
                     :{" "}
                   </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.pages}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.pages}></Form.Control>
                   <Form.Label>URL: </Form.Label>
-                  <Form.Control
-                    defaultValue={this.state.uri}
-                  ></Form.Control>
+                  <Form.Control defaultValue={this.state.uri}></Form.Control>
                   <Form.Label>
                     <FormattedMessage
                       id="bib.comments"

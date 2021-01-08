@@ -47,7 +47,7 @@ class UsrForm extends Component {
     if (params.cid) {
       const id = params.cid;
       sessionStorage.setItem("cid", id);
-      console.log("cid=" + sessionStorage.getItem("cid"));
+      //console.log(id);
       fetch("./api/id/" + id);
     }
   }
