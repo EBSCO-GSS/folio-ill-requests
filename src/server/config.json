@@ -16,5 +16,11 @@
     "folio_tenandid": "diku",
     "folio_user": "diku_admin",
     "folio_pass": "admin"
+  },
+  "udec": {
+    "folio_url": "https://okapi-bibliotecasudec-test.folio.ebsco.com/",
+    "folio_tenandid": "fs00001060",
+    "folio_user": "Eintegrations",
+    "folio_pass": "Xz4&BMv9b!K$"
   }
 }
