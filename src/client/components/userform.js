@@ -1,3 +1,19 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable function-paren-newline */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable dot-notation */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable react/sort-comp */
+/* eslint-disable no-var */
+/* eslint-disable arrow-parens */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable prefer-template */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable quotes */
+
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
@@ -5,6 +21,7 @@ import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import Conteiner from "react-bootstrap/Container";
 import { FormattedMessage } from "react-intl";
+
 const queryString = require("query-string");
 
 class UsrForm extends Component {
@@ -25,14 +42,14 @@ class UsrForm extends Component {
 
   mySetPassword = (event) => {
     this.setState({ pass: event.target.value });
-    //console.log(this.state.pass);
+    // console.log(this.state.pass);
   };
 
   submitHandle = (event) => {
     event.preventDefault();
     const usr = this.state.usr;
     const pass = this.state.pass;
-    //console.log(userName);
+    // console.log(userName);
     fetch("./api/getUser/" + usr + "&" + pass)
       .then((res) => res.json())
       .then((token) => this.setState({ data: token.info }))
@@ -43,11 +60,11 @@ class UsrForm extends Component {
 
   async componentDidMount() {
     const params = queryString.parse(location.search);
-    //console.log(params);
+    // console.log(params);
     if (params.cid) {
       const id = params.cid;
       sessionStorage.setItem("cid", id);
-      //console.log(id);
+      // console.log(id);
       fetch("./api/id/" + id);
     }
   }

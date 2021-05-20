@@ -1,3 +1,11 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable arrow-parens */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable prefer-template */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable quotes */
 import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
@@ -25,9 +33,9 @@ class Biblo extends Component {
       issue: "",
       spage: "",
       pages: "",
-      genre: "",
     };
   }
+
   componentWillMount() {
     this.setState({
       tit: this.state.url.get("title"),
@@ -68,7 +76,7 @@ class Biblo extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className="mt-2">
         <Card border="dark">
           <Card.Header as="h5">
             <FormattedMessage

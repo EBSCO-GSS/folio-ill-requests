@@ -1,11 +1,51 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable consistent-return */
+/* eslint-disable import/order */
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable operator-linebreak */
+/* eslint-disable no-return-assign */
+/* eslint-disable spaced-comment */
+/* eslint-disable no-return-await */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-shadow */
+/* eslint-disable no-inner-declarations */
+/* eslint-disable arrow-parens */
+/* eslint-disable vars-on-top */
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable no-unused-vars */
+/* eslint-disable object-shorthand */
+/* eslint-disable prefer-template */
+/* eslint-disable no-undef */
+/* eslint-disable dot-notation */
+/* eslint-disable no-var */
+/* eslint-disable quotes */
+
 const express = require("express");
 const axios = require("axios");
 const config = require("./config.json");
 const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
 
 const app = express();
 
 app.use(express.static("dist"));
+
+app.get("/api/con/:i&:u&:t&:uss&:p", (request, response) => {
+  var ins = {
+    folio_url: "https://" + request.param("u") + "/",
+    folio_tenandid: request.param("t"),
+    folio_user: request.param("uss"),
+    folio_pass: request.param("p"),
+  };
+
+  var x = Object.assign(config, { [request.param("i")]: ins });
+
+  fs.writeFile("./src/server/config.json", JSON.stringify(x), (err) => {
+    if (err) throw err;
+    console.log("update");
+  });
+});
 
 app.get("/api/id/:id", (request, response) => {
   var i = request.param("id");
@@ -49,7 +89,7 @@ function getToken() {
 }
 
 app.get("/api/getUser/:usr&:pass", (req, res) => {
-  //console.log(req.param("pass"));
+  // console.log(req.param("pass"));
   try {
     var name = req.param("usr");
     var pass = req.param("pass");
@@ -112,7 +152,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
     const bib = req.param("bib");
     const cid = req.param("cid");
 
-    //console.log(cid);
+    // console.log(cid);
 
     const bibdata = {
       source: "FOLIO",
@@ -153,6 +193,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
                 "X-Okapi-Token": tk,
               },
             }).then(function (res) {
+              // console.log(res.data);
               var l = res.data.locations[1]["id"];
               resolve(l);
             });
@@ -178,6 +219,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
               },
               data: bibdata,
             }).then(function (response) {
+              // console.log(response.data);
               var i = response.data["id"];
               resolve(i);
             });
@@ -190,7 +232,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
       let insId;
       let loc;
       let holdId;
-      //return new Promise(function(resolve, reject){
+      // return new Promise(function(resolve, reject){
       return (
         await getToken().then(function (response) {
           okt = response;
@@ -214,7 +256,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
             tagList: ["important"],
           },
         }),
-        console.log(hold),
+        // console.log(hold),
         new Promise(function (resolve, reject) {
           axios({
             url: config[cid]["folio_url"] + "holdings-storage/holdings",
@@ -241,7 +283,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
                   tagList: ["important"],
                 },
               };
-              //console.log(item);
+              // console.log(item);
               axios({
                 url: config[cid]["folio_url"] + "item-storage/items",
                 method: "post",
@@ -254,7 +296,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
               })
                 .then(function (resp) {
                   var it = resp.data["id"];
-                  //console.log(it);
+                  // console.log(it);
                   resolve(it);
                 })
                 .catch(function (e) {
@@ -291,7 +333,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
               },
             })
               .then(function (res) {
-                //console.log(res.data.instances[0]["id"]);
+                // console.log(res.data.instances[0]["id"]);
                 rId = res.data.instances[0]["id"];
               })
               .then(function () {
@@ -322,6 +364,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
                       },
                     })
                       .then(function (res) {
+                        //console.log(res.data);
                         var r = res.data.items[0]["id"];
                         //console.log(r);
                         resolve(r);
@@ -526,7 +569,7 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
                         }
                       })
                       .catch(function (e) {
-                        console.log(e);
+                        console.log(e.response.data.errors);
                       });
                   })
                   .catch(function (e) {
@@ -549,6 +592,6 @@ app.get("/api/request/:i&:a&:us&:bib&:cid", (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 8081, () =>
-  console.log(`Listening on port ${process.env.PORT || 8081}!`)
+app.listen(process.env.PORT || 8080, () =>
+  console.log(`Listening on port ${process.env.PORT || 8080}!`)
 );
