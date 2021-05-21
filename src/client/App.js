@@ -23,17 +23,17 @@ export default class App extends Component {
           <Router>
             <ul id="footer">
               <li>
-                <Link to="/">form</Link>
+                <Link to="/fir/">form</Link>
               </li>
               <li>
-                <Link to="/conf">config</Link>
+                <Link to="/fir/conf">config</Link>
               </li>
             </ul>
             <Switch>
-              <Route exact path="/">
+              <Route exact path="/fir/">
                 <Home />
               </Route>
-              <Route path="/conf">
+              <Route path="/fir/conf">
                 <Conf />
               </Route>
             </Switch>
