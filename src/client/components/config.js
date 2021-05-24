@@ -66,7 +66,7 @@ class Config extends Component {
     const uss = this.state.us;
     const p = this.state.pas;
 
-    fetch("./api/con/" + i + "&" + u + "&" + t + "&" + uss + "&" + p);
+    fetch("./fir/api/con/" + i + "&" + u + "&" + t + "&" + uss + "&" + p);
   };
 
   render() {

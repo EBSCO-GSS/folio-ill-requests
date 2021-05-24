@@ -67,7 +67,7 @@ class Biblo extends Component {
     const bib = this.state.atit;
     const cid = sessionStorage.getItem("cid");
 
-    fetch("./api/request/" + i + "&" + a + "&" + us + "&" + bib + "&" + cid)
+    fetch("./fir/api/request/" + i + "&" + a + "&" + us + "&" + bib + "&" + cid)
       .then((res) => console.log(res))
       .then(() => {
         alert("Exito!! se creo la solicitud correctamente");

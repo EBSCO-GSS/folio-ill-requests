@@ -31,7 +31,7 @@ const app = express();
 
 app.use(express.static("dist"));
 
-app.get("/api/con/:i&:u&:t&:uss&:p", (request, response) => {
+app.get("/fir/api/con/:i&:u&:t&:uss&:p", (request, response) => {
   var ins = {
     folio_url: "https://" + request.param("u") + "/",
     folio_tenandid: request.param("t"),
@@ -47,7 +47,7 @@ app.get("/api/con/:i&:u&:t&:uss&:p", (request, response) => {
   });
 });
 
-app.get("/api/id/:id", (request, response) => {
+app.get("/fir/api/id/:id", (request, response) => {
   var i = request.param("id");
   global.id = i;
 });
@@ -88,7 +88,7 @@ function getToken() {
   });
 }
 
-app.get("/api/getUser/:usr&:pass", (req, res) => {
+app.get("/fir/api/getUser/:usr&:pass", (req, res) => {
   // console.log(req.param("pass"));
   try {
     var name = req.param("usr");

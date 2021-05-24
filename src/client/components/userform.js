@@ -50,7 +50,7 @@ class UsrForm extends Component {
     const usr = this.state.usr;
     const pass = this.state.pass;
     // console.log(userName);
-    fetch("./api/getUser/" + usr + "&" + pass)
+    fetch("./fir/api/getUser/" + usr + "&" + pass)
       .then((res) => res.json())
       .then((token) => this.setState({ data: token.info }))
       .then(() =>
@@ -65,7 +65,7 @@ class UsrForm extends Component {
       const id = params.cid;
       sessionStorage.setItem("cid", id);
       // console.log(id);
-      fetch("./api/id/" + id);
+      fetch("./fir/api/id/" + id);
     }
   }
 
